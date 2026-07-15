@@ -4,11 +4,11 @@ SRCS = 	ft_strlen.s \
 		ft_write.s \
 		ft_read.s \
 		ft_strdup.s \
-		ft_atoi_base.s \
-		ft_list_push_front.s \
-		ft_list_size.s \
-		ft_list_sort.s \
-		ft_list_remove_if.s
+		ft_atoi_base_bonus.s \
+		ft_list_push_front_bonus.s \
+		ft_list_size_bonus.s \
+		ft_list_sort_bonus.s \
+		ft_list_remove_if_bonus.s
 OBJS = ${SRCS:.s=.o}
 NAME = libasm.a
 LIBS = ar rcs
@@ -35,5 +35,7 @@ fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
+
+bonus: all
 
 .PHONY:	all clean fclean re
