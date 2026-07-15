@@ -23,6 +23,7 @@ getFirstNodeDiff:
     jne setNewBegin
     mov rax, rdi
     mov rdi, [rdi + 8]
+    mov [r12], rdi
     call deleteNode
     jmp getFirstNodeDiff
 setNewBegin:

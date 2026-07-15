@@ -20,7 +20,7 @@ int     ft_atoi_base(char *str, char *base);
 void    ft_list_push_front(t_list **begin_list, void *data);
 int     ft_list_size(t_list *begin_list);
 void    ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));
-void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(const char *, const char *), void (*free_fct)(void *));
 
 int main()
 {
@@ -240,56 +240,57 @@ int main()
 
     //------------- ft_list_remove_if ------------
 
-    // char *first = malloc(6);
-    // char *second = malloc(7);
-    // char *third = malloc(6);
-    // strcpy(first, "first");
-    // strcpy(second, "second");
-    // strcpy(third, "third");
+    char *first = malloc(6);
+    char *second = malloc(7);
+    char *third = malloc(6);
+    strcpy(first, "first");
+    strcpy(second, "second");
+    strcpy(third, "third");
 
-    // t_list *node3 = malloc(sizeof(t_list));
-    // t_list *node2 = malloc(sizeof(t_list));
-    // t_list *node1 = malloc(sizeof(t_list));
+    t_list *node3 = malloc(sizeof(t_list));
+    t_list *node2 = malloc(sizeof(t_list));
+    t_list *node1 = malloc(sizeof(t_list));
 
-    // node3->data = (void *)third;
-    // node3->next = NULL;
-    // node2->data = (void *)second;
-    // node2->next = node3;
-    // node1->data = (void *)first;
-    // node1->next = node2;
+    node3->data = (void *)third;
+    node3->next = NULL;
+    node2->data = (void *)second;
+    node2->next = node3;
+    node1->data = (void *)first;
+    node1->next = NULL;
 
-    // t_list *list = node1;
+    t_list *list = node1;
 
-    // printf("before :\n");
-    // while (list) {
-    //     printf("%s\n", (char *)list->data);
-    //     list = list->next;
-    // }
-    // printf("\n");
+    printf("before :\n");
+    while (list) {
+        printf("%s\n", (char *)list->data);
+        list = list->next;
+    }
+    printf("\n");
 
-    // t_list **begin_list = &node1;
-    // char *data = "second";
-    // ft_list_remove_if(begin_list, (void *)data, ft_strcmp, free);
+    t_list **begin_list = &node1;
+    char *data = "first";
+    ft_list_remove_if(begin_list, (void *)data, ft_strcmp, free);
 
-    // if (begin_list)
-    //     list = *begin_list;
-    // else
-    //     list = NULL;
+    if (begin_list)
+        list = *begin_list;
+    else
+        list = NULL;
 
-    // printf("after :\n");
-    // while (list) {
-    //     printf("%s\n", (char *)list->data);
-    //     list = list->next;
-    // }
+    printf("after :\n");
+    printf("%p\n", list);
+    while (list) {
+        printf("%s\n", (char *)list->data);
+        list = list->next;
+    }
 
-    // if (begin_list)
-    //     list = *begin_list;
+    if (begin_list)
+        list = *begin_list;
 
-    // t_list *tmp;
-    // while (list) {
-    //     tmp = list;
-    //     list = list->next;
-    //     free(tmp->data);
-    //     free(tmp);
-    // }
+    t_list *tmp;
+    while (list) {
+        tmp = list;
+        list = list->next;
+        free(tmp->data);
+        free(tmp);
+    }
 }

@@ -23,8 +23,8 @@ MAIN = cc main.o libasm.a -o main
 
 ${NAME}: ${OBJS}
 	 ${LIBS} ${NAME} ${OBJS}
-	 ${MAINOBJ}
-	 ${MAIN}
+	 #${MAINOBJ}
+	 #${MAIN}
 
 all: ${NAME}
 
