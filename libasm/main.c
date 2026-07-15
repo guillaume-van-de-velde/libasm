@@ -19,7 +19,7 @@ char    *ft_strdup(const char *s);
 int     ft_atoi_base(char *str, char *base);
 void    ft_list_push_front(t_list **begin_list, void *data);
 int     ft_list_size(t_list *begin_list);
-void    ft_list_sort(t_list **begin_list, int (*cmp)());
+void    ft_list_sort(t_list **begin_list, int (*cmp)(const char *, const char *));
 void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 int main()
@@ -88,7 +88,7 @@ int main()
 
     //---------------- atoi_base -----------------
 
-    // char *str = "-01000001";
+    // char *str = "01000001";
     // char *base = "01";
 
     // printf("ft_atoi_base        = %d\n", ft_atoi_base(str, base));
@@ -183,6 +183,7 @@ int main()
     // node3->data = (void *)third;
     // node3->next = node2; 
 
+    // node3 = NULL;
     // t_list *list = node3;
     
     // printf("before :\n");

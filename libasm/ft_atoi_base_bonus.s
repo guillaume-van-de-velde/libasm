@@ -42,7 +42,17 @@ checkBase:
     cmp al, 0
     je .endCheckBase
     cmp al, 32
-    jle retZero
+    je retZero
+    cmp al, 9
+    je retZero
+    cmp al, 10
+    je retZero
+    cmp al, 11
+    je retZero
+    cmp al, 12
+    je retZero
+    cmp al, 13
+    je retZero
     cmp al, 127
     je retZero
     cmp al, 43
