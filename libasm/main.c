@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 typedef struct s_list
 {
@@ -19,8 +20,8 @@ char    *ft_strdup(const char *s);
 int     ft_atoi_base(char *str, char *base);
 void    ft_list_push_front(t_list **begin_list, void *data);
 int     ft_list_size(t_list *begin_list);
-void    ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));
-void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(const char *, const char *), void (*free_fct)(void *));
+void    ft_list_sort(t_list **begin_list, int (*cmp)());
+void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 int main()
 {
@@ -35,8 +36,8 @@ int main()
     //------------------ strcpy ------------------
 
     // const char *str = "Hello";
-    // char dest1[10] = {0};
-    // char dest2[10] = {0};
+    // char dest1[256] = {0};
+    // char dest2[256] = {0};
 
     // printf("strcpy        = %p, %p, %p, %s\n", dest1, strcpy(dest1, str), dest1, dest1);
     // printf("ft_strcpy     = %p, %p, %p, %s\n", dest2, ft_strcpy(dest2, str), dest2, dest2);
@@ -45,7 +46,7 @@ int main()
     //------------------ strcmp ------------------
 
     // const char *s1 = "Hello1";
-    // const char *s2 = "Hello1";
+    // const char *s2 = "Hello2";
 
     // printf("strcmp        = %d\n", strcmp(s1, s2));
     // printf("ft_strcmp     = %d\n", ft_strcmp(s1, s2));
@@ -65,14 +66,13 @@ int main()
     //------------------- read -------------------
 
     // int fd = 0;
-    // char buf1[256] = {0};
-    // char buf2[256] = {0};
-    // size_t count = 6;
+    // char buf[256] = {0};
+    // size_t count = 100;
 
-    // ssize_t retRead = read(fd, buf1, count);
-    // ssize_t retFtRead = ft_read(fd, buf2, count);
-    // printf("read        = %ld errno : %d buffer : %s\n", retRead, errno, buf1);
-    // printf("ft_read     = %ld errno : %d buffer : %s\n", retFtRead, errno, buf2);
+    // ssize_t retRead = read(fd, buf, count);
+    // // ssize_t retFtRead = ft_read(fd, buf, count);
+    // printf("read        = %ld errno : %d buffer : %s\n", retRead, errno, buf);
+    // // printf("ft_read     = %ld errno : %d buffer : %s\n", retFtRead, errno, buf);
 
     //------------------ strdup ------------------
 
@@ -110,34 +110,24 @@ int main()
     // node1->data = (void *)first;
     // node1->next = node2;
 
-    // t_list *list = NULL;
-    // ft_list_push_front(&list, (void*)2);
-	// ft_list_push_front(&list, (void*)3);
-	// ft_list_push_front(&list, (void*)4);
-	// ft_list_push_front(&list, (void*)-1);
-	// ft_list_push_front(&list, (void*)5);
-	// ft_list_push_front(&list, (void*)-2);
-	// ft_list_push_front(&list, (void*)6);
-	// ft_list_push_front(&list, (void*)-3);
-	// ft_list_push_front(&list, (void*)7);
-	// ft_list_push_front(&list, (void*)0);
+    // t_list *list = node1;
     
     // printf("before :\n");
     // t_list *save = list;
     // while (list) {
-    //     printf("%ld\n", (long)list->data);
+    //     printf("%s\n", (char *)list->data);
     //     list = list->next;
     // }
     // printf("\n");
     
     // t_list **begin_list = &save;
-    // ft_list_push_front(begin_list, (void *)45);
+    // ft_list_push_front(begin_list, "zero");
 
     // list = *begin_list;
 
     // printf("after :\n");
     // while (list) {
-    //     printf("%ld\n", (long)list->data);
+    //     printf("%s\n", (char *)list->data);
     //     list = list->next;
     // }
 
@@ -193,40 +183,24 @@ int main()
     // node3->data = (void *)third;
     // node3->next = node2; 
 
-    // t_list *list = NULL;
-    // ft_list_push_front(&list, (void*)2);
-	// ft_list_push_front(&list, (void*)3);
-	// ft_list_push_front(&list, (void*)4);
-	// ft_list_push_front(&list, (void*)-1);
-	// ft_list_push_front(&list, (void*)5);
-	// ft_list_push_front(&list, (void*)-2);
-	// ft_list_push_front(&list, (void*)6);
-	// ft_list_push_front(&list, (void*)-3);
-	// ft_list_push_front(&list, (void*)7);
-	// ft_list_push_front(&list, (void*)0);
-
-    // // node3 = NULL;
-    // // t_list *list = node3;
+    // t_list *list = node3;
     // t_list *save = list;
     // printf("before :\n");
     // while (list) {
-    //     printf("%ld\n", (long)list->data);
+    //     printf("%s\n", list->data);
     //     list = list->next;
     // }
     // printf("\n");
 
     // t_list **begin_list = &save;
 
-    // printf("coucou1\n");
-    // printf("%d\n", lower((void *)0, (void *)7));
-    // ft_list_sort(begin_list, &lower);
-    // printf("coucou2\n");
+    // ft_list_sort(begin_list, (int (*)())ft_strcmp);
 
     // list = *begin_list;
 
     // printf("after :\n");
     // while (list) {
-    //     printf("%ld\n", (long)list->data);
+    //     printf("%s\n", list->data);
     //     list = list->next;
     // }
 
@@ -240,57 +214,56 @@ int main()
 
     //------------- ft_list_remove_if ------------
 
-    char *first = malloc(6);
-    char *second = malloc(7);
-    char *third = malloc(6);
-    strcpy(first, "first");
-    strcpy(second, "second");
-    strcpy(third, "third");
+    // char *first = malloc(6);
+    // char *second = malloc(7);
+    // char *third = malloc(6);
+    // strcpy(first, "first");
+    // strcpy(second, "second");
+    // strcpy(third, "third");
 
-    t_list *node3 = malloc(sizeof(t_list));
-    t_list *node2 = malloc(sizeof(t_list));
-    t_list *node1 = malloc(sizeof(t_list));
+    // t_list *node3 = malloc(sizeof(t_list));
+    // t_list *node2 = malloc(sizeof(t_list));
+    // t_list *node1 = malloc(sizeof(t_list));
 
-    node3->data = (void *)third;
-    node3->next = NULL;
-    node2->data = (void *)second;
-    node2->next = node3;
-    node1->data = (void *)first;
-    node1->next = NULL;
+    // node3->data = (void *)third;
+    // node3->next = NULL;
+    // node2->data = (void *)second;
+    // node2->next = node3;
+    // node1->data = (void *)first;
+    // node1->next = node2;
 
-    t_list *list = node1;
+    // t_list *list = node1;
 
-    printf("before :\n");
-    while (list) {
-        printf("%s\n", (char *)list->data);
-        list = list->next;
-    }
-    printf("\n");
+    // printf("before :\n");
+    // while (list) {
+    //     printf("%s\n", (char *)list->data);
+    //     list = list->next;
+    // }
+    // printf("\n");
 
-    t_list **begin_list = &node1;
-    char *data = "first";
-    ft_list_remove_if(begin_list, (void *)data, ft_strcmp, free);
+    // t_list **begin_list = &node1;
+    // char *data = "second";
+    // ft_list_remove_if(begin_list, (void *)data, (int (*)())ft_strcmp, free);
 
-    if (begin_list)
-        list = *begin_list;
-    else
-        list = NULL;
+    // if (begin_list)
+    //     list = *begin_list;
+    // else
+    //     list = NULL;
 
-    printf("after :\n");
-    printf("%p\n", list);
-    while (list) {
-        printf("%s\n", (char *)list->data);
-        list = list->next;
-    }
+    // printf("after :\n");
+    // while (list) {
+    //     printf("%s\n", (char *)list->data);
+    //     list = list->next;
+    // }
 
-    if (begin_list)
-        list = *begin_list;
+    // if (begin_list)
+    //     list = *begin_list;
 
-    t_list *tmp;
-    while (list) {
-        tmp = list;
-        list = list->next;
-        free(tmp->data);
-        free(tmp);
-    }
+    // t_list *tmp;
+    // while (list) {
+    //     tmp = list;
+    //     list = list->next;
+    //     free(tmp->data);
+    //     free(tmp);
+    // }
 }

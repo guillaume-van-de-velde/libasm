@@ -15,15 +15,13 @@ LIBS = ar rcs
 SC = nasm
 RM 	= rm -f
 SFLAGS = -f elf64
-MAINOBJ = cc -c main.c -o main.o
-MAIN = cc main.o libasm.a -o main
+MAIN = cc main.c -L. -lasm
 
 .s.o:
 	 ${SC} ${SFLAGS} $< -o ${<:.s=.o}
 
 ${NAME}: ${OBJS}
 	 ${LIBS} ${NAME} ${OBJS}
-	 #${MAINOBJ}
 	 #${MAIN}
 
 all: ${NAME}
