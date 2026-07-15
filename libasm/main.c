@@ -19,7 +19,7 @@ char    *ft_strdup(const char *s);
 int     ft_atoi_base(char *str, char *base);
 void    ft_list_push_front(t_list **begin_list, void *data);
 int     ft_list_size(t_list *begin_list);
-void    ft_list_sort(t_list **begin_list, int (*cmp)(const char *, const char *));
+void    ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));
 void    ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 int main()
@@ -110,24 +110,34 @@ int main()
     // node1->data = (void *)first;
     // node1->next = node2;
 
-    // t_list *list = node1;
+    // t_list *list = NULL;
+    // ft_list_push_front(&list, (void*)2);
+	// ft_list_push_front(&list, (void*)3);
+	// ft_list_push_front(&list, (void*)4);
+	// ft_list_push_front(&list, (void*)-1);
+	// ft_list_push_front(&list, (void*)5);
+	// ft_list_push_front(&list, (void*)-2);
+	// ft_list_push_front(&list, (void*)6);
+	// ft_list_push_front(&list, (void*)-3);
+	// ft_list_push_front(&list, (void*)7);
+	// ft_list_push_front(&list, (void*)0);
     
     // printf("before :\n");
+    // t_list *save = list;
     // while (list) {
-    //     printf("%s\n", (char *)list->data);
+    //     printf("%ld\n", (long)list->data);
     //     list = list->next;
     // }
     // printf("\n");
-
-    // t_list **begin_list = &node1;
-    // char *data = "zero";
-    // ft_list_push_front(begin_list, (void *)data);
+    
+    // t_list **begin_list = &save;
+    // ft_list_push_front(begin_list, (void *)45);
 
     // list = *begin_list;
 
     // printf("after :\n");
     // while (list) {
-    //     printf("%s\n", (char *)list->data);
+    //     printf("%ld\n", (long)list->data);
     //     list = list->next;
     // }
 
@@ -183,25 +193,40 @@ int main()
     // node3->data = (void *)third;
     // node3->next = node2; 
 
-    // node3 = NULL;
-    // t_list *list = node3;
-    
+    // t_list *list = NULL;
+    // ft_list_push_front(&list, (void*)2);
+	// ft_list_push_front(&list, (void*)3);
+	// ft_list_push_front(&list, (void*)4);
+	// ft_list_push_front(&list, (void*)-1);
+	// ft_list_push_front(&list, (void*)5);
+	// ft_list_push_front(&list, (void*)-2);
+	// ft_list_push_front(&list, (void*)6);
+	// ft_list_push_front(&list, (void*)-3);
+	// ft_list_push_front(&list, (void*)7);
+	// ft_list_push_front(&list, (void*)0);
+
+    // // node3 = NULL;
+    // // t_list *list = node3;
+    // t_list *save = list;
     // printf("before :\n");
     // while (list) {
-    //     printf("%s\n", (char *)list->data);
+    //     printf("%ld\n", (long)list->data);
     //     list = list->next;
     // }
     // printf("\n");
 
-    // t_list **begin_list = &node3;
+    // t_list **begin_list = &save;
 
-    // ft_list_sort(begin_list, ft_strcmp);
+    // printf("coucou1\n");
+    // printf("%d\n", lower((void *)0, (void *)7));
+    // ft_list_sort(begin_list, &lower);
+    // printf("coucou2\n");
 
     // list = *begin_list;
 
     // printf("after :\n");
     // while (list) {
-    //     printf("%s\n", (char *)list->data);
+    //     printf("%ld\n", (long)list->data);
     //     list = list->next;
     // }
 
