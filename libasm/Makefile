@@ -16,18 +16,19 @@ SC = nasm
 RM 	= rm -f
 SFLAGS = -f elf64
 MAIN = cc main.c -L. -lasm
+BIN = ./a.out
 
 .s.o:
 	 ${SC} ${SFLAGS} $< -o ${<:.s=.o}
 
 ${NAME}: ${OBJS}
 	 ${LIBS} ${NAME} ${OBJS}
-	 #${MAIN}
+	 ${MAIN}
 
 all: ${NAME}
 
 clean:
-	 ${RM} ${OBJS}
+	 ${RM} ${OBJS} ${BIN}
 
 fclean: clean
 	${RM} ${NAME}
